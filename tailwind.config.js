@@ -4,7 +4,12 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'subjectivity': ['Subjectivity'],
+        'subjectivity-bold': ['Subjectivity-Bold'],           
+      },
+    },
   },
   plugins: [],
 }

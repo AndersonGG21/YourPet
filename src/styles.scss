@@ -1,24 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-light-purple/theme.css";
 @import "primeng/resources/primeng.min.css";
+// @import url('/src/assets/fonts/Subjectivity-Regular.otf');
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Subjectivity;
+  src: url("./assets/fonts/Subjectivity-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Subjectivity-Bold;
+  src: url("./assets/fonts/Subjectivity-Bold.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer reset, primeng;
 
-@layer reset {    
-    button {
-        &:focus {
-            box-shadow: none;            
-        }
+@layer reset {
+  body {
+    @apply font-subjectivity;
+  }
+
+  button {
+    &:focus {
+      box-shadow: none;
     }
+  }
 }
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    background-color: whitesmoke;
+  background-color: #edf6f9;
+  @apply font-subjectivity;
 }
