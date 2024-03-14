@@ -1,0 +1,13 @@
+#menu-backdrop {
+  position: absolute;
+  background-color: rgba(66, 64, 64, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+  left: var(--left);
+  top: var(--top);
+  width: var(--width);
+  height: var(--heigth);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  z-index: -1;
+}

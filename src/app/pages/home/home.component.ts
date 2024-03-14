@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common'
+
 
 @Component({
   selector: 'app-home',
