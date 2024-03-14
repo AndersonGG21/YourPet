@@ -4,6 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { AccordionModule } from 'primeng/accordion';
 import { PrimeNGConfig } from 'primeng/api';
+import { HeaderComponent } from '@components/header/header.component';
 
 
 
@@ -11,7 +12,7 @@ import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonModule, AccordionModule, RippleModule],
+  imports: [RouterOutlet, ButtonModule, AccordionModule, RippleModule, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

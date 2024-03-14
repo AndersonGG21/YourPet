@@ -4,15 +4,12 @@ import { NgOptimizedImage } from '@angular/common'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export default class HomeComponent implements OnInit{
+export default class HomeComponent{
   
-  ngOnInit(): void {
-    
-  }
 
   
 }
