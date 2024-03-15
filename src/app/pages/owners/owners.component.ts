@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './owners.component.html',
   styleUrl: './owners.component.scss'
 })
-export class OwnersComponent {
+export default class OwnersComponent {
 
 }
