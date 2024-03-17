@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Owner } from '@models/owner';
-import { PetService } from '@services/pet.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
@@ -12,6 +11,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { UpperCasePipe } from '@angular/common';
+import { OwnerService } from '@services/owner.service';
 
 interface ExportColumn {
   title: string;
@@ -49,7 +49,7 @@ export default class OwnersComponent implements OnInit{
   submitted: boolean = false;
 
   constructor(
-    private petService: PetService,
+    private ownerService: OwnerService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {};
@@ -63,7 +63,8 @@ export default class OwnersComponent implements OnInit{
         correo: 'juan.perez@example.com',
         direccion: 'Calle 123',
         telefono: '1234567890',
-        image: 'url-de-la-imagen-1'
+        image: 'url-de-la-imagen-1',
+        gender: 'male'
       },
       {
         idCliente: 2,
@@ -72,7 +73,8 @@ export default class OwnersComponent implements OnInit{
         correo: 'ana.gomez@example.com',
         direccion: 'Avenida 456',
         telefono: '0987654321',
-        image: 'url-de-la-imagen-2'
+        image: 'url-de-la-imagen-2',
+        gender: 'female'
       },
       {
         idCliente: 3,
@@ -81,7 +83,8 @@ export default class OwnersComponent implements OnInit{
         correo: 'pedro.martinez@example.com',
         direccion: 'Boulevard 789',
         telefono: '1122334455',
-        image: 'url-de-la-imagen-3'
+        image: 'url-de-la-imagen-3',
+        gender: 'male'
       },
       {
         idCliente: 4,
@@ -90,7 +93,8 @@ export default class OwnersComponent implements OnInit{
         correo: 'maria.rodriguez@example.com',
         direccion: 'Callejón 101112',
         telefono: '5566778899',
-        image: 'url-de-la-imagen-4'
+        image: 'url-de-la-imagen-4',
+        gender: 'female'
       },
       {
         idCliente: 5,
@@ -99,9 +103,16 @@ export default class OwnersComponent implements OnInit{
         correo: 'carlos.gonzalez@example.com',
         direccion: 'Paseo 131415',
         telefono: '9988776655',
-        image: 'url-de-la-imagen-5'
+        image: 'url-de-la-imagen-5',
+        gender: 'male'
       }
     ];
+
+    this.owners.forEach((owner) => {
+      this.ownerService.getRandImage(owner.gender!).subscribe((data) => {        
+        owner.image = data.results[0].picture.medium;
+      });
+    });
   }
 
 
