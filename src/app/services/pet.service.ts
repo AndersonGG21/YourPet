@@ -14,4 +14,9 @@ export class PetService {
   getPets() : Observable<Pet[]> {
     return this.httpClient.get<Pet[]>(this.PETS_API);
   }
+
+  getRandImage(raza: string) : Observable<any> {
+    raza = raza.toLowerCase();
+    return this.httpClient.get<any>(`https://dog.ceo/api/breed/${raza}/images/random`);
+  }
 }

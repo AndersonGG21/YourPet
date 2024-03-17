@@ -9,7 +9,16 @@
         class="p-button-success p-2"
         (click)="openNew()"
       ></button>
-			<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-file-pdf"
+        (click)="exportPdf()"
+        class="p-button-warning mr-2"
+        pTooltip="PDF"
+        tooltipPosition="bottom"
+      ></button>
     </div>
   </p-toolbar>
 
@@ -25,7 +34,7 @@
     dataKey="id"
     currentPageReportTemplate="Mostrando {first} hasta {last} de {totalRecords} datos"
     [showCurrentPageReport]="true"
-		[exportHeader]="'customExportHeader'"
+    [exportHeader]="'customExportHeader'"
   >
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between p-2">
@@ -97,15 +106,13 @@
     <ng-template pTemplate="body" let-pet>
       <tr>
         <td class="text-center">{{ pet.idMascota }}</td>
-        <td>
+        <td class="flex items-center justify-center">
           <img
-            [src]="
-              'https://primefaces.org/cdn/primeng/images/demo/product/' +
-              pet.image
-            "
+            [src]="pet.image"
             [alt]="pet.name"
-            width="50"
-            class="shadow-4"
+            width="80"
+            height="80"
+            class="shadow-lg rounded"
           />
         </td>
         <td class="text-center">{{ pet.nombre }}</td>
@@ -147,16 +154,6 @@
   [modal]="true"
 >
   <ng-template pTemplate="content">
-    @if (pet.image) {
-    <img
-      [src]="
-        'https://primefaces.org/cdn/primeng/images/demo/product/' + pet.image
-      "
-      [alt]="pet.image"
-      class="block m-auto pb-3"
-    />
-    }
-
     <form class="p-4 md:p-5">
       <div class="grid gap-4 mb-4 grid-cols-2">
         <div class="col-span-2">
@@ -209,30 +206,34 @@
             [(ngModel)]="pet.edad"
           />
         </div>
-        <div class="col-span-2">
-          <label for="raza" class="block mb-2 text-sm font-medium text-gray-900"
+        <div class="col-span-2 sm:col-span-2">
+          <label
+            for="raza"
+            class="block mb-2 text-sm font-medium text-gray-900"
             >Raza</label
           >
-          <input
-            type="text"
-            name="raza"
+          <select
             id="raza"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-            placeholder="Pitbull"
-            required
-            pInputTextarea
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
             [(ngModel)]="pet.raza"
-          />
+            (change)="seePet(pet)"
+            name="raza"
+          >
+            <option selected="">Seleccinar raza</option>
+            @for (breed of breedsList; track breed) {
+              <option [value]="breed | uppercase">{{ breed | uppercase }}</option>              
+            }
+          </select>
         </div>
         <div class="col-span-2 sm:col-span-1">
           <label
             for="category"
-            class="block mb-2 text-sm font-medium text-gray-900 "
+            class="block mb-2 text-sm font-medium text-gray-900"
             >Medicamentos</label
           >
           <select
             id="category"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
           >
             <option selected="">Seleccionar medicamentos</option>
             <option value="TV">TV/Monitors</option>
@@ -244,12 +245,12 @@
         <div class="col-span-2 sm:col-span-1">
           <label
             for="category"
-            class="block mb-2 text-sm font-medium text-gray-900 "
+            class="block mb-2 text-sm font-medium text-gray-900"
             >Dueño</label
           >
           <select
             id="category"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
           >
             <option selected="">Seleccionar Dueño</option>
             <option value="TV">TV/Monitors</option>
@@ -283,18 +284,37 @@
 
 <p-confirmDialog #cd>
   <ng-template pTemplate="headless" let-message>
-      <div class="flex flex-col items-center p-5 bg-white rounded">
-          <div class="rounded-full bg-blue-400 inline-flex justify-center items-center h-20 w-20 -mt-14">
-              <i class="pi pi-question text-5xl"></i>
-          </div>
-          <span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}</span>
-          <p class="mb-0">{{ message.message }}</p>
-          <div class="flex items-center gap-2 mt-4">
-              <button pButton label="Save" (click)="cd.accept()" class="w-24 p-2"></button>
-              <button pButton label="Cancel" (click)="cd.reject()" class="p-button-outlined w-24 p-2"></button>
-          </div>
+    <div class="flex flex-col items-center p-5 bg-white rounded">
+      <div
+        class="rounded-full bg-blue-400 inline-flex justify-center items-center h-20 w-20 -mt-14"
+      >
+        <i class="pi pi-question text-5xl"></i>
       </div>
+      <span class="font-bold text-2xl block mb-2 mt-4">{{
+        message.header
+      }}</span>
+      <p class="mb-0">{{ message.message }}</p>
+      <div class="flex items-center gap-2 mt-4">
+        <button
+          pButton
+          label="Save"
+          (click)="cd.accept()"
+          class="w-24 p-2"
+        ></button>
+        <button
+          pButton
+          label="Cancel"
+          (click)="cd.reject()"
+          class="p-button-outlined w-24 p-2"
+        ></button>
+      </div>
+    </div>
   </ng-template>
 </p-confirmDialog>
 
-<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+<p-toast
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransitionOptions]="'1000ms'"
+  [hideTransitionOptions]="'1000ms'"
+  [showTransformOptions]="'translateX(100%)'"
+></p-toast>
