@@ -53,8 +53,6 @@ export default class PetsComponent implements OnInit {
 
   submitted: boolean = false;
 
-  statuses!: any[];
-
   exportColumns!: ExportColumn[];
 
   cols!: Column[];

@@ -1,1 +1,333 @@
-<p>owners works!</p>
+<article class="flex items-center justify-center h-max bg-gray-100">
+    <div class="p-4 w-full">
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12 sm:col-span-6 md:col-span-3">
+          <div class="flex flex-row bg-white shadow-sm rounded p-4">
+            <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-paw"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.7 13.5c-1.1 -2 -1.441 -2.5 -2.7 -2.5c-1.259 0 -1.736 .755 -2.836 2.747c-.942 1.703 -2.846 1.845 -3.321 3.291c-.097 .265 -.145 .677 -.143 .962c0 1.176 .787 2 1.8 2c1.259 0 3 -1 4.5 -1s3.241 1 4.5 1c1.013 0 1.8 -.823 1.8 -2c0 -.285 -.049 -.697 -.146 -.962c-.475 -1.451 -2.512 -1.835 -3.454 -3.538z" /><path d="M20.188 8.082a1.039 1.039 0 0 0 -.406 -.082h-.015c-.735 .012 -1.56 .75 -1.993 1.866c-.519 1.335 -.28 2.7 .538 3.052c.129 .055 .267 .082 .406 .082c.739 0 1.575 -.742 2.011 -1.866c.516 -1.335 .273 -2.7 -.54 -3.052z" /><path d="M9.474 9c.055 0 .109 0 .163 -.011c.944 -.128 1.533 -1.346 1.32 -2.722c-.203 -1.297 -1.047 -2.267 -1.932 -2.267c-.055 0 -.109 0 -.163 .011c-.944 .128 -1.533 1.346 -1.32 2.722c.204 1.293 1.048 2.267 1.933 2.267z" /><path d="M16.456 6.733c.214 -1.376 -.375 -2.594 -1.32 -2.722a1.164 1.164 0 0 0 -.162 -.011c-.885 0 -1.728 .97 -1.93 2.267c-.214 1.376 .375 2.594 1.32 2.722c.054 .007 .108 .011 .162 .011c.885 0 1.73 -.974 1.93 -2.267z" /><path d="M5.69 12.918c.816 -.352 1.054 -1.719 .536 -3.052c-.436 -1.124 -1.271 -1.866 -2.009 -1.866c-.14 0 -.277 .027 -.407 .082c-.816 .352 -1.054 1.719 -.536 3.052c.436 1.124 1.271 1.866 2.009 1.866c.14 0 .277 -.027 .407 -.082z" /></svg>
+            </div>
+            <div class="flex flex-col flex-grow ml-4">
+              <div class="text-sm text-gray-500">Mascotas</div>
+              <div class="font-bold text-lg">{{ owners.length }}</div>
+            </div>
+          </div>
+        </div>        
+        <div class="col-span-12 sm:col-span-6 md:col-span-3">
+          <div class="flex flex-row bg-white shadow-sm rounded p-4">
+            <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-orange-100 text-orange-500">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-affiliate"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275" /><path d="M11.683 12.317l5.759 -5.759" /><path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0" /></svg>
+            </div>
+            <div class="flex flex-col flex-grow ml-4">
+              <div class="text-sm text-gray-500">Nuevos Afiliados</div>
+              <div class="font-bold text-lg">190</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 md:col-span-3">
+          <div class="flex flex-row bg-white shadow-sm rounded p-4">
+            <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-red-100 text-red-500">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <div class="flex flex-col flex-grow ml-4">
+              <div class="text-sm text-gray-500">Ganancias</div>
+              <div class="font-bold text-lg">$ 32k</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <div class="card p-7">
+    <p-toolbar styleClass="mb-4 ml-2 gap-2 bg-transparent border-none">
+      <div class="flex gap-2 justify-center">
+        <button
+          pButton
+          pRipple
+          label="Nueva Mascota"
+          icon="pi pi-plus"
+          class="p-button-success p-2"
+          (click)="openNew()"
+        ></button>
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-file-pdf"
+          (click)="exportPdf()"
+          class="p-button-warning mr-2"
+          pTooltip="PDF"
+          tooltipPosition="bottom"
+        ></button>
+      </div>
+    </p-toolbar>
+  
+    <p-table
+      #dt
+      [value]="owners"
+      [rows]="5"
+      [paginator]="true"
+      [globalFilterFields]="['idCliente', 'nombre', 'apellido', 'correo','direccion', 'telefono']"
+      [tableStyle]="{ 'min-width': '75rem' }"
+      [(selection)]="selectedOwners"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Mostrando {first} hasta {last} de {totalRecords} datos"
+      [showCurrentPageReport]="true"
+      [exportHeader]="'customExportHeader'"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex items-center justify-between p-2">
+          <h5 class="m-2 text-xl">Administrar Clientes</h5>
+          <div class="relative">
+            <label
+              for="search"
+              class="mb-2 text-sm font-medium text-gray-900 sr-only"
+              >Buscar</label
+            >
+            <div
+              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+            <input
+              #searchInpunt
+              type="search"
+              id="search"
+              class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+              placeholder="Buscar"
+              required
+              (input)="dt.filterGlobal(searchInpunt.value, 'contains')"
+            />
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr class="h-12 min-w-52 text-center p-7">
+          <th pSortableColumn="idCliente" class="pl-2">
+            ID <p-sortIcon field="idCliente"></p-sortIcon>
+          </th>
+          <th class="min-w-20 text-center">Foto</th>
+          <th pSortableColumn="nombre" class="text-center">
+            Nombre <p-sortIcon field="nombre"></p-sortIcon>
+          </th>
+          <th pSortableColumn="apellido" class="text-center">
+            Apellido <p-sortIcon field="apellido"></p-sortIcon>
+          </th>
+          <th pSortableColumn="correo" class="text-center">
+            Correo <p-sortIcon field="correo"></p-sortIcon>
+          </th>
+          <th pSortableColumn="direccion" class="text-center">
+            Dirección <p-sortIcon field="direccion"></p-sortIcon>
+          </th>
+          <th pSortableColumn="telefono" class="text-center">
+            Teléfono <p-sortIcon field="telefono"></p-sortIcon>
+          </th>          
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-owner>
+        <tr>
+          <td class="text-center">{{ owner.idCliente }}</td>
+          <td class="flex items-center justify-center">
+            <img
+              [src]="owner.image"
+              [alt]="owner.nombre"
+              width="80"
+              height="80"
+              class="shadow-lg rounded"
+            />
+          </td>
+          <td class="text-center">{{ owner.nombre }}</td>
+          <td class="text-center">{{ owner.apellido }}</td>
+          <td class="text-center">{{ owner.correo }}</td>
+          <td class="text-center">{{ owner.direccion }}</td>
+          <td class="text-center">{{ owner.telefono }}</td>          
+          <td>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-success mr-2"
+              (click)="editPet(owner)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-warning"
+              (click)="deletePet(owner)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+          En total hay {{ owners ? owners.length : 0 }} clientes.
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <p-dialog
+    [(visible)]="ownerDialog"
+    [style]="{ width: '450px' }"
+    header="Datos de la mascota"
+    [modal]="true"
+  >
+    <ng-template pTemplate="content">
+      <form class="p-4 md:p-5">
+        <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2">
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
+              >Nombre</label
+            >
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="Anderson"
+              pInputText
+              id="name"
+              [(ngModel)]="owner.nombre"
+              required
+              autofocus
+            />
+            @if (submitted && !owner.nombre) {
+                <small class="p-error">Name is required.</small>
+            }
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label for="apellido" class="block mb-2 text-sm font-medium text-gray-900"
+              >Apellido</label
+            >
+            <input
+              type="text"
+              name="apellido"
+              id="apellido"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="Garces"
+              required              
+              [(ngModel)]="owner.apellido"
+            />
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label for="correo" class="block mb-2 text-sm font-medium text-gray-900"
+              >Correo</label
+            >
+            <input
+              type="email"
+              name="correo"
+              id="correo"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="xxxx@gmail.com"
+              required              
+              [(ngModel)]="owner.correo"
+            />
+          </div>
+          <div class="col-span-2 sm:col-span-2">
+            <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900"
+              >Dirección</label
+            >
+            <input
+              type="text"
+              name="direccion"
+              id="direccion"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="CRA 69 # 21-15"
+              required              
+              [(ngModel)]="owner.direccion"
+            />
+            
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label
+              for="telefono"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Teléfono</label
+            >
+            <input
+              type="text"
+              name="telefono"
+              id="telefono"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="300 123 4567"
+              required              
+              [(ngModel)]="owner.telefono"
+            >
+          </div>          
+        </div>
+      </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button
+        pButton
+        pRipple
+        label="Cancelar"
+        icon="pi pi-times"
+        class="p-button-text p-2 g-2 p-button-warning"
+        (click)="hideDialog()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Guardar"
+        icon="pi pi-check"
+        class="p-button-text p-2 g-2 p-button-success"
+        (click)="savePet()"
+      ></button>
+    </ng-template>
+  </p-dialog>
+  
+  <p-confirmDialog #cd>
+    <ng-template pTemplate="headless" let-message>
+      <div class="flex flex-col items-center p-5 bg-white rounded">
+        <div
+          class="rounded-full bg-blue-400 inline-flex justify-center items-center h-20 w-20 -mt-14"
+        >
+          <i class="pi pi-question text-5xl"></i>
+        </div>
+        <span class="font-bold text-2xl block mb-2 mt-4">{{
+          message.header
+        }}</span>
+        <p class="mb-0">{{ message.message }}</p>
+        <div class="flex items-center gap-2 mt-4">
+          <button
+            pButton
+            label="Save"
+            (click)="cd.accept()"
+            class="w-24 p-2"
+          ></button>
+          <button
+            pButton
+            label="Cancel"
+            (click)="cd.reject()"
+            class="p-button-outlined w-24 p-2"
+          ></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-confirmDialog>
+  
+  <p-toast
+    [showTransformOptions]="'translateY(100%)'"
+    [showTransitionOptions]="'1000ms'"
+    [hideTransitionOptions]="'1000ms'"
+    [showTransformOptions]="'translateX(100%)'"
+  ></p-toast>
+  
