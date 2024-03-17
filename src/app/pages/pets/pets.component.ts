@@ -112,15 +112,17 @@ export default class PetsComponent implements OnInit{
 
     deleteSelectedProducts() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected products?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
+            header: 'Are you sure?',
+            message: 'Please confirm to proceed.',
             accept: () => {
+                this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
                 this.pets = this.pets.filter((val) => !this.selectedPets?.includes(val));
                 this.selectedPets = null;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
+            },
+            reject: () => {
+                this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
             }
-        });
+        });        
     }
 
     editProduct(pet: Pet) {
