@@ -134,39 +134,12 @@ export default class PetsComponent implements OnInit {
     this.petDialog = true;
   }
 
-  deleteSelectedProducts() {
-    this.confirmationService.confirm({
-      header: 'Estás seguro?',
-      message: 'Please confirm to proceed.',
-      accept: () => {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Confirmed',
-          detail: 'You have accepted',
-          life: 3000,
-        });
-        this.pets = this.pets.filter(
-          (val) => !this.selectedPets?.includes(val)
-        );
-        this.selectedPets = null;
-      },
-      reject: () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Rejected',
-          detail: 'You have rejected',
-          life: 3000,
-        });
-      },
-    });
-  }
-
-  editProduct(pet: Pet) {
+  editPet(pet: Pet) {
     this.pet = { ...pet };
     this.petDialog = true;
   }
 
-  deleteProduct(pet: Pet) {
+  deletePet(pet: Pet) {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar a ' + pet.nombre + '?',
       header: 'Confirmar',
@@ -204,7 +177,7 @@ export default class PetsComponent implements OnInit {
     this.submitted = false;
   }
 
-  saveProduct() {
+  savePet() {
     this.submitted = true;
 
     if (this.pet.nombre?.trim()) {
