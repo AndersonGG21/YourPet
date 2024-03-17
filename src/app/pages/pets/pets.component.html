@@ -1,3 +1,54 @@
+<article class="flex items-center h-max bg-gray-100">
+  <div class="p-4 w-full">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 sm:col-span-6 md:col-span-3">
+        <div class="flex flex-row bg-white shadow-sm rounded p-4">
+          <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-paw"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.7 13.5c-1.1 -2 -1.441 -2.5 -2.7 -2.5c-1.259 0 -1.736 .755 -2.836 2.747c-.942 1.703 -2.846 1.845 -3.321 3.291c-.097 .265 -.145 .677 -.143 .962c0 1.176 .787 2 1.8 2c1.259 0 3 -1 4.5 -1s3.241 1 4.5 1c1.013 0 1.8 -.823 1.8 -2c0 -.285 -.049 -.697 -.146 -.962c-.475 -1.451 -2.512 -1.835 -3.454 -3.538z" /><path d="M20.188 8.082a1.039 1.039 0 0 0 -.406 -.082h-.015c-.735 .012 -1.56 .75 -1.993 1.866c-.519 1.335 -.28 2.7 .538 3.052c.129 .055 .267 .082 .406 .082c.739 0 1.575 -.742 2.011 -1.866c.516 -1.335 .273 -2.7 -.54 -3.052z" /><path d="M9.474 9c.055 0 .109 0 .163 -.011c.944 -.128 1.533 -1.346 1.32 -2.722c-.203 -1.297 -1.047 -2.267 -1.932 -2.267c-.055 0 -.109 0 -.163 .011c-.944 .128 -1.533 1.346 -1.32 2.722c.204 1.293 1.048 2.267 1.933 2.267z" /><path d="M16.456 6.733c.214 -1.376 -.375 -2.594 -1.32 -2.722a1.164 1.164 0 0 0 -.162 -.011c-.885 0 -1.728 .97 -1.93 2.267c-.214 1.376 .375 2.594 1.32 2.722c.054 .007 .108 .011 .162 .011c.885 0 1.73 -.974 1.93 -2.267z" /><path d="M5.69 12.918c.816 -.352 1.054 -1.719 .536 -3.052c-.436 -1.124 -1.271 -1.866 -2.009 -1.866c-.14 0 -.277 .027 -.407 .082c-.816 .352 -1.054 1.719 -.536 3.052c.436 1.124 1.271 1.866 2.009 1.866c.14 0 .277 -.027 .407 -.082z" /></svg>
+          </div>
+          <div class="flex flex-col flex-grow ml-4">
+            <div class="text-sm text-gray-500">Mascotas</div>
+            <div class="font-bold text-lg">{{ pets.length }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 md:col-span-3">
+        <div class="flex flex-row bg-white shadow-sm rounded p-4">
+          <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-green-100 text-green-500">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-timeline"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 16l6 -7l5 5l5 -6" /><path d="M15 14m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M10 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M20 8m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+          </div>
+          <div class="flex flex-col flex-grow ml-4">
+            <div class="text-sm text-gray-500">Razas</div>
+            <div class="font-bold text-lg">{{ breedsList.length }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 md:col-span-3">
+        <div class="flex flex-row bg-white shadow-sm rounded p-4">
+          <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-orange-100 text-orange-500">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-affiliate"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275" /><path d="M11.683 12.317l5.759 -5.759" /><path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" /><path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0" /></svg>
+          </div>
+          <div class="flex flex-col flex-grow ml-4">
+            <div class="text-sm text-gray-500">Nuevos Afiliados</div>
+            <div class="font-bold text-lg">190</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 sm:col-span-6 md:col-span-3">
+        <div class="flex flex-row bg-white shadow-sm rounded p-4">
+          <div class="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-red-100 text-red-500">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div class="flex flex-col flex-grow ml-4">
+            <div class="text-sm text-gray-500">Ganancias</div>
+            <div class="font-bold text-lg">$ 32k</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
 <div class="card p-7">
   <p-toolbar styleClass="mb-4 ml-2 gap-2 bg-transparent border-none">
     <div class="flex gap-2 justify-center">
@@ -207,9 +258,7 @@
           />
         </div>
         <div class="col-span-2 sm:col-span-2">
-          <label
-            for="raza"
-            class="block mb-2 text-sm font-medium text-gray-900"
+          <label for="raza" class="block mb-2 text-sm font-medium text-gray-900"
             >Raza</label
           >
           <select
@@ -221,7 +270,7 @@
           >
             <option selected="">Seleccinar raza</option>
             @for (breed of breedsList; track breed) {
-              <option [value]="breed | uppercase">{{ breed | uppercase }}</option>              
+            <option [value]="breed | uppercase">{{ breed | uppercase }}</option>
             }
           </select>
         </div>
