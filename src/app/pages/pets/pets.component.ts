@@ -112,7 +112,7 @@ export default class PetsComponent implements OnInit{
 
     deleteSelectedProducts() {
         this.confirmationService.confirm({
-            header: 'Are you sure?',
+            header: 'Estás seguro?',
             message: 'Please confirm to proceed.',
             accept: () => {
                 this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
@@ -132,9 +132,8 @@ export default class PetsComponent implements OnInit{
 
     deleteProduct(pet: Pet) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + pet.nombre + '?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
+            message: '¿Estás seguro de que quieres eliminar a ' + pet.nombre + '?',
+            header: 'Confirmar',            
             accept: () => {
                 this.pets = this.pets.filter((val) => val.idMascota !== pet.idMascota);
                 this.pet = {
@@ -146,7 +145,10 @@ export default class PetsComponent implements OnInit{
                   idMedicamento: 0,
                   idCliente: 0,
                 };
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+                this.messageService.add({ severity: 'success', summary: 'Exitoso', detail: 'Mascota Borrada', life: 3000 });
+            },
+            reject: () => {
+                this.messageService.add({ severity: '', summary: 'Cancelado', detail: 'Operación Cancelada', life: 3000 });
             }
         });
     }
@@ -162,12 +164,12 @@ export default class PetsComponent implements OnInit{
         if (this.pet.nombre?.trim()) {
             if (this.pet.idMascota) {
                 this.pets[this.findIndexById(this.pet.idMascota)] = this.pet;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                this.messageService.add({ severity: 'success', summary: 'Exitoso', detail: 'Mascota actualizada', life: 3000 });
             } else {
                 this.pet.idMascota = this.createId();
                 // this.product.image = 'product-placeholder.svg';
                 this.pets.push(this.pet);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                this.messageService.add({ severity: 'success', summary: 'Exitoso', detail: 'Mascota Creada', life: 3000 });
             }
 
             this.pets = [...this.pets];

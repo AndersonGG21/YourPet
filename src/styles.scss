@@ -34,6 +34,21 @@
       box-shadow: none;
     }
   }
+
+  .p-toast {    
+    .p-toast-message {
+      height: 70px;
+      width: 250px;   
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }  
+    
+    .p-toast-message-content {
+      display: flex;          
+      gap: 20px;            
+    }
+  }
 }
 
 * {
