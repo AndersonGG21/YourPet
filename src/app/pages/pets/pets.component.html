@@ -4,7 +4,7 @@
       <button
         pButton
         pRipple
-        label="New"
+        label="Nueva Mascota"
         icon="pi pi-plus"
         class="p-button-success p-2"
         (click)="openNew()"
@@ -25,7 +25,7 @@
   <p-table
     #dt
     [value]="pets"
-    [rows]="10"
+    [rows]="5"
     [paginator]="true"
     [globalFilterFields]="['idMascota', 'nombre', 'raza', 'edad', 'peso']"
     [tableStyle]="{ 'min-width': '75rem' }"
@@ -38,7 +38,7 @@
   >
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between p-2">
-        <h5 class="m-2 text-xl">Manage Pets</h5>
+        <h5 class="m-2 text-xl">Administrar Mascotas</h5>
         <div class="relative">
           <label
             for="search"
@@ -81,7 +81,7 @@
         <th pSortableColumn="idMascota" class="pl-2">
           ID <p-sortIcon field="idMascota"></p-sortIcon>
         </th>
-        <th class="min-w-20 text-center">Image</th>
+        <th class="min-w-20 text-center">Foto</th>
         <th pSortableColumn="nombre" class="text-center">
           Nombre <p-sortIcon field="nombre"></p-sortIcon>
         </th>

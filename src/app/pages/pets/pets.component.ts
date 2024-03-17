@@ -72,7 +72,7 @@ export default class PetsComponent implements OnInit {
       {
         idMascota: 1,
         nombre: 'Fido',
-        raza: 'Doberman',
+        raza: 'DOBERMAN',
         edad: 5,
         peso: 30,
         idMedicamento: 101,
@@ -81,13 +81,30 @@ export default class PetsComponent implements OnInit {
       {
         idMascota: 2,
         nombre: 'Whiskers',
-        raza: 'Doberman',
+        raza: 'DOBERMAN',
         edad: 3,
         peso: 10,
         idMedicamento: 102,
         idCliente: 1002,
       },
-      // add more pets as needed
+      {
+        idMascota: 3,
+        nombre: 'Luna',
+        raza: 'DALMATIAN',
+        edad: 2,
+        peso: 25,
+        idMedicamento: 103,
+        idCliente: 1003,
+      },
+      {
+        idMascota: 4,
+        nombre: 'Max',
+        raza: 'PUG',
+        edad: 4,
+        peso: 35,
+        idMedicamento: 104,
+        idCliente: 1004,
+      },
     ];
   }
 
