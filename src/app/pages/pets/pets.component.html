@@ -10,14 +10,7 @@
         class="p-button-success p-2"
         (click)="openNew()"
       ></button>
-      <button
-        pButton
-        pRipple
-        icon="pi pi-trash"
-        class="p-button-danger p-2"
-        (click)="deleteSelectedProducts()"
-        [disabled]="!selectedPets || !selectedPets.length"
-      ></button>
+			<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
     </div>
   </p-toolbar>
 
@@ -33,6 +26,7 @@
     dataKey="id"
     currentPageReportTemplate="Mostrando {first} hasta {last} de {totalRecords} datos"
     [showCurrentPageReport]="true"
+		[exportHeader]="'customExportHeader'"
   >
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between p-2">

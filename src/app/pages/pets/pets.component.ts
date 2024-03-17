@@ -12,6 +12,18 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 
+interface ExportColumn {
+    title: string;
+    dataKey: string;
+}
+
+interface Column {
+    field: string;
+    header: string;
+    customExportHeader?: string;
+}
+
+
 @Component({
   selector: 'app-pets',
   standalone: true,
@@ -21,7 +33,7 @@ import { FormsModule } from '@angular/forms';
 })
 export default class PetsComponent implements OnInit{
 
-  petDialog: boolean = false;
+    petDialog: boolean = false;
 
     pets!: Pet[];
 
@@ -32,6 +44,11 @@ export default class PetsComponent implements OnInit{
     submitted: boolean = false;
 
     statuses!: any[];
+
+    exportColumns!: ExportColumn[];
+
+    cols!: Column[];
+
 
     constructor(private petService: PetService, private messageService: MessageService, private confirmationService: ConfirmationService) {
         this.pets = [
@@ -67,6 +84,16 @@ export default class PetsComponent implements OnInit{
             { label: 'LOWSTOCK', value: 'lowstock' },
             { label: 'OUTOFSTOCK', value: 'outofstock' }
         ];
+
+        this.cols = [
+            { field: 'idMascota', header: 'ID', customExportHeader: 'ID Mascota' },
+            { field: 'nombre', header: 'Nombre' },
+            { field: 'edad', header: 'Edad' },
+            { field: 'peso', header: 'Peso' },
+            { field: 'idCliente', header: 'Dueño' }
+        ];
+
+        this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
     }
 
     openNew() {
@@ -187,5 +214,15 @@ export default class PetsComponent implements OnInit{
         }
 
         return '';
+    }
+
+    exportPdf() {
+        import('jspdf').then((jsPDF) => {
+            import('jspdf-autotable').then((x) => {
+                const doc = new jsPDF.default('p', 'px', 'a4');
+                (doc as any).autoTable(this.exportColumns, this.pets);
+                doc.save('pets.pdf');
+            });
+        });
     }
 }
