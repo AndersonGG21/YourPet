@@ -1,1 +1,294 @@
-<p>pets works!</p>
+<div class="card p-7">
+  <p-toast></p-toast>
+  <p-toolbar styleClass="mb-4 ml-2 gap-2 bg-transparent border-none">
+    <div class="flex gap-2 justify-center">
+      <button
+        pButton
+        pRipple
+        label="New"
+        icon="pi pi-plus"
+        class="p-button-success p-2"
+        (click)="openNew()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-trash"
+        class="p-button-danger p-2"
+        (click)="deleteSelectedProducts()"
+        [disabled]="!selectedPets || !selectedPets.length"
+      ></button>
+    </div>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="pets"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['idMascota', 'nombre', 'raza', 'edad', 'peso']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedPets"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Mostrando {first} hasta {last} de {totalRecords} datos"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex items-center justify-between p-2">
+        <h5 class="m-2 text-xl">Manage Pets</h5>
+        <div class="relative">
+          <label
+            for="search"
+            class="mb-2 text-sm font-medium text-gray-900 sr-only"
+            >Buscar</label
+          >
+          <div
+            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500 dark:text-gray-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            #searchInpunt
+            type="search"
+            id="search"
+            class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+            placeholder="Buscar"
+            required
+            (input)="dt.filterGlobal(searchInpunt.value, 'contains')"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr class="h-12 min-w-52 text-center p-7">
+        <th pSortableColumn="idMascota" class="pl-2">
+          ID <p-sortIcon field="idMascota"></p-sortIcon>
+        </th>
+        <th class="min-w-20 text-center">Image</th>
+        <th pSortableColumn="nombre" class="text-center">
+          Nombre <p-sortIcon field="nombre"></p-sortIcon>
+        </th>
+        <th pSortableColumn="raza" class="text-center">
+          Raza <p-sortIcon field="raza"></p-sortIcon>
+        </th>
+        <th pSortableColumn="edad" class="text-center">
+          Edad <p-sortIcon field="edad"></p-sortIcon>
+        </th>
+        <th pSortableColumn="peso" class="text-center">
+          Peso <p-sortIcon field="peso"></p-sortIcon>
+        </th>
+        <th pSortableColumn="idCliente" class="text-center">
+          Dueño <p-sortIcon field="idCliente"></p-sortIcon>
+        </th>
+        <th pSortableColumn="idMedicamento" class="text-center">
+          Medicamento <p-sortIcon field="idMedicamento"></p-sortIcon>
+        </th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pet>
+      <tr>
+        <td class="text-center">{{ pet.idMascota }}</td>
+        <td>
+          <img
+            [src]="
+              'https://primefaces.org/cdn/primeng/images/demo/product/' +
+              pet.image
+            "
+            [alt]="pet.name"
+            width="50"
+            class="shadow-4"
+          />
+        </td>
+        <td class="text-center">{{ pet.nombre }}</td>
+        <td class="text-center">{{ pet.raza }}</td>
+        <td class="text-center">{{ pet.edad }}</td>
+        <td class="text-center">{{ pet.peso }}</td>
+        <td class="text-center">{{ pet.idCliente }}</td>
+        <td class="text-center">{{ pet.idMedicamento }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+            (click)="editProduct(pet)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+            (click)="deleteProduct(pet)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        En total hay {{ pets ? pets.length : 0 }} mascotas.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  [(visible)]="petDialog"
+  [style]="{ width: '450px' }"
+  header="Datos de la mascota"
+  [modal]="true"
+>
+  <ng-template pTemplate="content">
+    @if (pet.image) {
+    <img
+      [src]="
+        'https://primefaces.org/cdn/primeng/images/demo/product/' + pet.image
+      "
+      [alt]="pet.image"
+      class="block m-auto pb-3"
+    />
+    }
+
+    <form class="p-4 md:p-5">
+      <div class="grid gap-4 mb-4 grid-cols-2">
+        <div class="col-span-2">
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
+            >Nombre</label
+          >
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Firulais"
+            pInputText
+            id="name"
+            [(ngModel)]="pet.nombre"
+            required
+            autofocus
+          />
+          @if (submitted && !pet.nombre) {
+          <small class="p-error">Name is required.</small>
+          }
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <label for="peso" class="block mb-2 text-sm font-medium text-gray-900"
+            >Peso</label
+          >
+          <input
+            type="number"
+            name="peso"
+            id="peso"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="50kg"
+            required
+            min="0"
+            [(ngModel)]="pet.peso"
+          />
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <label for="edad" class="block mb-2 text-sm font-medium text-gray-900"
+            >Edad</label
+          >
+          <input
+            type="number"
+            name="edad"
+            id="edad"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="22"
+            required
+            min="0"
+            [(ngModel)]="pet.edad"
+          />
+        </div>
+        <div class="col-span-2">
+          <label for="raza" class="block mb-2 text-sm font-medium text-gray-900"
+            >Raza</label
+          >
+          <input
+            type="text"
+            name="raza"
+            id="raza"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Pitbull"
+            required
+            pInputTextarea
+            [(ngModel)]="pet.raza"
+          />
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <label
+            for="category"
+            class="block mb-2 text-sm font-medium text-gray-900 "
+            >Medicamentos</label
+          >
+          <select
+            id="category"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
+          >
+            <option selected="">Seleccionar medicamentos</option>
+            <option value="TV">TV/Monitors</option>
+            <option value="PC">PC</option>
+            <option value="GA">Gaming/Console</option>
+            <option value="PH">Phones</option>
+          </select>
+        </div>
+        <div class="col-span-2 sm:col-span-1">
+          <label
+            for="category"
+            class="block mb-2 text-sm font-medium text-gray-900 "
+            >Dueño</label
+          >
+          <select
+            id="category"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
+          >
+            <option selected="">Seleccionar Dueño</option>
+            <option value="TV">TV/Monitors</option>
+            <option value="PC">PC</option>
+            <option value="GA">Gaming/Console</option>
+            <option value="PH">Phones</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      icon="pi pi-times"
+      class="p-button-text p-2 g-2 p-button-warning"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Guardar"
+      icon="pi pi-check"
+      class="p-button-text p-2 g-2 p-button-success"
+      (click)="saveProduct()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+
+
+  
