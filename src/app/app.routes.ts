@@ -10,7 +10,7 @@ export const routes: Routes = [
         loadComponent: ()=> import('./pages/pets/pets.component') 
     },
     { 
-        path: 'home',
+        path: 'owners',
         loadComponent: ()=> import('./pages/owners/owners.component') 
     },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
