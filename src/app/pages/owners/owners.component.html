@@ -44,7 +44,7 @@
         <button
           pButton
           pRipple
-          label="Nueva Mascota"
+          label="Nueva Cliente"
           icon="pi pi-plus"
           class="p-button-success p-2"
           (click)="openNew()"
@@ -163,14 +163,14 @@
               pRipple
               icon="pi pi-pencil"
               class="p-button-rounded p-button-success mr-2"
-              (click)="editPet(owner)"
+              (click)="editOwner(owner)"
             ></button>
             <button
               pButton
               pRipple
               icon="pi pi-trash"
               class="p-button-rounded p-button-warning"
-              (click)="deletePet(owner)"
+              (click)="deleteOwner(owner)"
             ></button>
           </td>
         </tr>
@@ -186,10 +186,21 @@
   <p-dialog
     [(visible)]="ownerDialog"
     [style]="{ width: '450px' }"
-    header="Datos de la mascota"
+    header="Datos del Cliente"
     [modal]="true"
   >
     <ng-template pTemplate="content">
+    @if (owner.image) {
+        <div class="flex justify-center items-center">
+            <img
+              [src]="owner.image"
+              [alt]="owner.nombre"
+              width="80"
+              height="80"
+              class="shadow-lg rounded"
+            />
+        </div>
+    }
       <form class="p-4 md:p-5">
         <div class="grid gap-4 mb-4 grid-cols-2">
           <div class="col-span-2">
@@ -262,7 +273,7 @@
               >Teléfono</label
             >
             <input
-              type="text"
+              type="number"
               name="telefono"
               id="telefono"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
@@ -289,7 +300,7 @@
         label="Guardar"
         icon="pi pi-check"
         class="p-button-text p-2 g-2 p-button-success"
-        (click)="savePet()"
+        (click)="saveOwner()"
       ></button>
     </ng-template>
   </p-dialog>
@@ -298,9 +309,9 @@
     <ng-template pTemplate="headless" let-message>
       <div class="flex flex-col items-center p-5 bg-white rounded">
         <div
-          class="rounded-full bg-blue-400 inline-flex justify-center items-center h-20 w-20 -mt-14"
+          class="rounded-full bg-orange-400 inline-flex justify-center items-center h-20 w-20 -mt-14"
         >
-          <i class="pi pi-question text-5xl"></i>
+          <i class="pi pi-question text-5xl text-white"></i>
         </div>
         <span class="font-bold text-2xl block mb-2 mt-4">{{
           message.header
@@ -309,15 +320,15 @@
         <div class="flex items-center gap-2 mt-4">
           <button
             pButton
-            label="Save"
+            label="Eliminar"
             (click)="cd.accept()"
-            class="w-24 p-2"
+            class="p-button-outlined p-button-warning w-24 p-2"
           ></button>
           <button
             pButton
-            label="Cancel"
+            label="Cancelar"
             (click)="cd.reject()"
-            class="p-button-outlined w-24 p-2"
+            class="p-button-outlined p-button-danger w-24 p-2"
           ></button>
         </div>
       </div>

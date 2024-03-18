@@ -49,6 +49,15 @@
       gap: 20px;            
     }
   }
+
+  .p-dialog {
+    .p-dialog-header	{
+      height: 50px;
+      display: flex;      
+      justify-content: space-around;      
+    }
+  }
+  
 }
 
 * {

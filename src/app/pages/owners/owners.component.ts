@@ -129,12 +129,12 @@ export default class OwnersComponent implements OnInit{
     this.ownerDialog = true;
   }
 
-  editPet(owner: Owner) {
+  editOwner(owner: Owner) {
     this.owner = { ...owner };
     this.ownerDialog = true;
   }
 
-  deletePet(owner: Owner) {
+  deleteOwner(owner: Owner) {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar a ' + owner.nombre + '?',
       header: 'Confirmar',
@@ -171,28 +171,34 @@ export default class OwnersComponent implements OnInit{
     this.submitted = false;
   }
 
-  savePet() {
+  saveOwner() {
     this.submitted = true;
 
     if (this.owner.nombre?.trim()) {
-      if (this.owner.idCliente) {
-        this.owners[this.findIndexById(this.owner.idCliente)] = this.owner;
+      if (this.owner.idCliente) {        
+        this.owners[this.findIndexById(this.owner.idCliente)] = this.owner;        
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
           detail: 'Mascota actualizada',
           life: 3000,
-        });
+        });        
       } else {
-        this.owner.idCliente = this.createId();
-        // this.product.image = 'product-placeholder.svg';
-        this.owners.push(this.owner);
+        this.owner.idCliente = this.createId();              
+        var aux = this.owner;
+
+        this.ownerService.getRandImage(aux.gender!).subscribe((data) => {          
+          aux.image = data.results[0].picture.medium;                                        
+          this.owners.push(aux);                    
+          this.owners = [...this.owners];
+        })          
+        
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
-          detail: 'Mascota Creada',
+          detail: 'Cliente Creado',
           life: 3000,
-        });
+        });        
       }
 
       this.owners = [...this.owners];
@@ -227,19 +233,6 @@ export default class OwnersComponent implements OnInit{
       id += numbers[Math.floor(Math.random() * numbers.length)];
     }
     return id;
-  }
-
-  getSeverity(status: string) {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-    }
-
-    return '';
   }
 
   exportPdf() {
