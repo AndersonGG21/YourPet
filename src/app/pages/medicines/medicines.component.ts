@@ -18,6 +18,12 @@ interface ExportColumn {
   dataKey: string;
 }
 
+interface Column {
+  field: string;
+  header: string;
+  customExportHeader?: string;
+}
+
 @Component({
   selector: 'app-medicines',
   standalone: true,
@@ -45,6 +51,7 @@ export default class MedicinesComponent {
 
   exportColumns!: ExportColumn[];
   submitted: boolean = false;
+  cols!: Column[];
 
   constructor(
     private medicineService: MedicineService,
@@ -85,6 +92,18 @@ export default class MedicinesComponent {
         dosis: 500
       }
     ];
+
+    this.cols = [
+      { field: 'idMedicamento', header: 'ID', customExportHeader: 'ID Mascota' },
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'descripcion', header: 'Descripción' },      
+      { field: 'dosis', header: 'Dosis' },
+    ];
+
+    this.exportColumns = this.cols.map((col) => ({
+      title: col.header,
+      dataKey: col.field,
+    }));
   }
 
 
@@ -119,7 +138,7 @@ export default class MedicinesComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
-          detail: 'Cliente Borrado',
+          detail: 'Medicamento Borrado',
           life: 3000,
         });
       },
@@ -148,7 +167,7 @@ export default class MedicinesComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
-          detail: 'Mascota actualizada',
+          detail: 'Medicamento actualizado',
           life: 3000,
         });        
       } else {
@@ -159,7 +178,7 @@ export default class MedicinesComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
-          detail: 'Cliente Creado',
+          detail: 'Medicamento Creado',
           life: 3000,
         });        
       }
@@ -201,7 +220,7 @@ export default class MedicinesComponent {
       import('jspdf-autotable').then((x) => {
         const doc = new jsPDF.default('p', 'px', 'a4');
         (doc as any).autoTable(this.exportColumns, this.medicines);
-        doc.save('pets.pdf');
+        doc.save('medicines.pdf');
       });
     });
   }
