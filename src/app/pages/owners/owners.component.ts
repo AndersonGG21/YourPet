@@ -18,7 +18,6 @@ interface ExportColumn {
   dataKey: string;
 }
 
-
 @Component({
   selector: 'app-owners',
   standalone: true,
