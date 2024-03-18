@@ -185,7 +185,7 @@ export default class OwnersComponent implements OnInit{
         });        
       } else {
         this.owner.idCliente = this.createId();              
-        var aux = this.owner;
+        var aux = this.owner;        
 
         this.ownerService.getRandImage(aux.gender!).subscribe((data) => {          
           aux.image = data.results[0].picture.medium;                                        

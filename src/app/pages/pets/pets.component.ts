@@ -206,8 +206,12 @@ export default class PetsComponent implements OnInit {
         });
       } else {
         this.pet.idMascota = this.createId();
-        // this.product.image = 'product-placeholder.svg';
-        this.pets.push(this.pet);
+        var aux = this.pet;
+        this.petService.getRandImage(this.pet.raza).subscribe((data) => {          
+          aux.image = data.message;
+          this.pets.push(aux);                    
+          this.pets = [...this.pets];
+        })                  
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
