@@ -18,6 +18,12 @@ interface ExportColumn {
   dataKey: string;
 }
 
+interface Column {
+  field: string;
+  header: string;
+  customExportHeader?: string;
+}
+
 @Component({
   selector: 'app-owners',
   standalone: true,
@@ -46,6 +52,7 @@ export default class OwnersComponent implements OnInit{
 
   exportColumns!: ExportColumn[];
   submitted: boolean = false;
+  cols!: Column[];
 
   constructor(
     private ownerService: OwnerService,
@@ -112,6 +119,20 @@ export default class OwnersComponent implements OnInit{
         owner.image = data.results[0].picture.medium;
       });
     });
+
+    this.cols = [
+      { field: 'idCliente', header: 'ID', customExportHeader: 'ID Cliente' },
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'apellido', header: 'Apellido' },      
+      { field: 'correo', header: 'Correo' },
+      { field: 'direccion', header: 'Dirección' },
+      { field: 'telefono', header: 'Teléfono' },
+    ];
+
+    this.exportColumns = this.cols.map((col) => ({
+      title: col.header,
+      dataKey: col.field,
+    }));
   }
 
 
@@ -239,7 +260,7 @@ export default class OwnersComponent implements OnInit{
       import('jspdf-autotable').then((x) => {
         const doc = new jsPDF.default('p', 'px', 'a4');
         (doc as any).autoTable(this.exportColumns, this.owners);
-        doc.save('pets.pdf');
+        doc.save('owners.pdf');
       });
     });
   }

@@ -94,7 +94,7 @@ export default class MedicinesComponent {
     ];
 
     this.cols = [
-      { field: 'idMedicamento', header: 'ID', customExportHeader: 'ID Mascota' },
+      { field: 'idMedicamento', header: 'ID', customExportHeader: 'ID Medicamento' },
       { field: 'nombre', header: 'Nombre' },
       { field: 'descripcion', header: 'Descripción' },      
       { field: 'dosis', header: 'Dosis' },
