@@ -337,9 +337,9 @@
   <ng-template pTemplate="headless" let-message>
     <div class="flex flex-col items-center p-5 bg-white rounded">
       <div
-        class="rounded-full bg-blue-400 inline-flex justify-center items-center h-20 w-20 -mt-14"
+        class="rounded-full bg-orange-400 inline-flex justify-center items-center h-20 w-20 -mt-14"
       >
-        <i class="pi pi-question text-5xl"></i>
+        <i class="pi pi-question text-5xl text-white"></i>
       </div>
       <span class="font-bold text-2xl block mb-2 mt-4">{{
         message.header
@@ -348,15 +348,15 @@
       <div class="flex items-center gap-2 mt-4">
         <button
           pButton
-          label="Save"
+          label="Eliminar"
           (click)="cd.accept()"
-          class="w-24 p-2"
+          class="p-button-outlined p-button-warning w-24 p-2"
         ></button>
         <button
           pButton
-          label="Cancel"
+          label="Cancelar"
           (click)="cd.reject()"
-          class="p-button-outlined w-24 p-2"
+          class="p-button-outlined p-button-danger w-24 p-2"
         ></button>
       </div>
     </div>
