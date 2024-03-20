@@ -281,6 +281,20 @@
               required              
               [(ngModel)]="owner.telefono"
             >
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <label for="gender" class="block mb-2 text-sm font-medium text-gray-900"
+              >Género</label
+            >
+            <select
+              id="gender"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+              [(ngModel)]="owner.gender"              
+              name="gender"
+            >              
+              <option value="MALE">Masculino</option>
+              <option value="FEMALE">Femenino</option>              
+            </select>
           </div>          
         </div>
       </form>
