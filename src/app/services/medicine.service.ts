@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class MedicineService {
 
-  readonly MEDICINE_API = "http://localhost:44310/api/Medicamento";
+  readonly MEDICINE_API = "https://localhost:44310/api/Medicamento";
   constructor(private httpClient : HttpClient) { }
 
-  getMedicines() : Observable<Medicine[]>{
-    return this.httpClient.get<Medicine[]>(this.MEDICINE_API);
+  getMedicines() : Observable<any[]>{
+    return this.httpClient.get<any[]>(this.MEDICINE_API);
   }
 
   deleteMedicine(id: number) : Observable<any> {

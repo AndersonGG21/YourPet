@@ -43,7 +43,7 @@ export default class MedicinesComponent {
 
   medicineDialog: boolean = false;
 
-  medicines!: Medicine[];
+  medicines: Medicine[] = [];
 
   medicine!: Medicine;
 
@@ -60,38 +60,9 @@ export default class MedicinesComponent {
   ) {};
 
   ngOnInit(): void {
-    this.medicines = [
-      {
-        idMedicamento: 1,
-        nombre: 'Medicamento 1',
-        descripcion: 'Descripción del medicamento 1',
-        dosis: 100
-      },
-      {
-        idMedicamento: 2,
-        nombre: 'Medicamento 2',
-        descripcion: 'Descripción del medicamento 2',
-        dosis: 200
-      },
-      {
-        idMedicamento: 3,
-        nombre: 'Medicamento 3',
-        descripcion: 'Descripción del medicamento 3',
-        dosis: 300
-      },
-      {
-        idMedicamento: 4,
-        nombre: 'Medicamento 4',
-        descripcion: 'Descripción del medicamento 4',
-        dosis: 400
-      },
-      {
-        idMedicamento: 5,
-        nombre: 'Medicamento 5',
-        descripcion: 'Descripción del medicamento 5',
-        dosis: 500
-      }
-    ];
+    this.medicineService.getMedicines().subscribe((data) => {      
+      this.medicines = data;
+    });
 
     this.cols = [
       { field: 'idMedicamento', header: 'ID', customExportHeader: 'ID Medicamento' },
@@ -120,7 +91,7 @@ export default class MedicinesComponent {
 
   editMedicine(medicine: Medicine) {
     this.medicine = { ...medicine };
-    this.medicineDialog = true;
+    this.medicineDialog = true;    
   }
 
   deleteMedicine(medicine: Medicine) {
@@ -140,6 +111,10 @@ export default class MedicinesComponent {
           summary: 'Exitoso',
           detail: 'Medicamento Borrado',
           life: 3000,
+        });
+
+        this.medicineService.deleteMedicine(medicine.idMedicamento).subscribe(() => {
+          console.log('Medicamento Eliminado');
         });
       },
       reject: () => {
@@ -169,10 +144,12 @@ export default class MedicinesComponent {
           summary: 'Exitoso',
           detail: 'Medicamento actualizado',
           life: 3000,
-        });        
-      } else {
-        this.medicine.idMedicamento = this.createId();              
+        });    
         
+        this.medicineService.updateMedicine(this.medicine.idMedicamento, this.medicine).subscribe(() => {
+          console.log('Medicamento actualizado');
+        });
+      } else {        
         this.medicines.push(this.medicine);                    
         
         this.messageService.add({
@@ -180,7 +157,12 @@ export default class MedicinesComponent {
           summary: 'Exitoso',
           detail: 'Medicamento Creado',
           life: 3000,
-        });        
+        });   
+        
+        this.medicineService.saveMedicine(this.medicine).subscribe(() => {
+          console.log('Medicamento Creado');
+          window.location.reload();
+        });
       }
 
       this.medicines = [...this.medicines];
