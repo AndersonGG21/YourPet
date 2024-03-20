@@ -6,5 +6,5 @@ export type Owner = {
     direccion: string;    
     telefono: string;    
     image?: string;
-    gender?: string
+    genero?: string
 }

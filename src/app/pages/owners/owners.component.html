@@ -203,6 +203,23 @@
     }
       <form class="p-4 md:p-5">
         <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2 sm:col-span-2">
+            <label
+              for="id"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Documento:</label
+            >
+            <input
+              type="number"
+              name="id"
+              id="id"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="1000889145"
+              required              
+              [maxLength]="10"
+              [(ngModel)]="owner.idCliente"
+            >
+          </div>
           <div class="col-span-2">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
               >Nombre</label
@@ -283,17 +300,17 @@
             >
           </div>
           <div class="col-span-2 sm:col-span-1">
-            <label for="gender" class="block mb-2 text-sm font-medium text-gray-900"
+            <label for="genero" class="block mb-2 text-sm font-medium text-gray-900"
               >Género</label
             >
             <select
-              id="gender"
+              id="genero"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-              [(ngModel)]="owner.gender"              
-              name="gender"
+              [(ngModel)]="owner.genero"              
+              name="genero"
             >              
-              <option value="MALE">Masculino</option>
-              <option value="FEMALE">Femenino</option>              
+              <option value="male">Masculino</option>
+              <option value="female">Femenino</option>              
             </select>
           </div>          
         </div>
