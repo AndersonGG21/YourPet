@@ -170,8 +170,8 @@
         <td class="text-center">{{ pet.raza }}</td>
         <td class="text-center">{{ pet.edad }}</td>
         <td class="text-center">{{ pet.peso }} kg</td>
-        <td class="text-center">{{ pet.idCliente }}</td>
-        <td class="text-center">{{ pet.idMedicamento }}</td>
+        <td class="text-center">{{ getOwnerNameById(pet.idCliente) }}</td>
+        <td class="text-center">{{ getMedNameById(pet.idMedicamento) }}</td>
         <td>
           <button
             pButton
@@ -276,36 +276,38 @@
         </div>
         <div class="col-span-2 sm:col-span-1">
           <label
-            for="category"
+            for="medicine"
             class="block mb-2 text-sm font-medium text-gray-900"
             >Medicamentos</label
           >
           <select
-            id="category"
+            id="medicine"
+            name="medicine"
+            [(ngModel)]="pet.idMedicamento"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
           >
             <option selected="">Seleccionar medicamentos</option>
-            <option value="TV">TV/Monitors</option>
-            <option value="PC">PC</option>
-            <option value="GA">Gaming/Console</option>
-            <option value="PH">Phones</option>
+            @for (med of medicines; track $index) {
+            <option [value]="med.idMedicamento">{{ med.nombre }}</option>
+            }
           </select>
         </div>
         <div class="col-span-2 sm:col-span-1">
           <label
-            for="category"
+            for="owner"
             class="block mb-2 text-sm font-medium text-gray-900"
             >Dueño</label
           >
           <select
-            id="category"
+            id="owner"
+            name="owner"
+            [(ngModel)]="pet.idCliente"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
           >
             <option selected="">Seleccionar Dueño</option>
-            <option value="TV">TV/Monitors</option>
-            <option value="PC">PC</option>
-            <option value="GA">Gaming/Console</option>
-            <option value="PH">Phones</option>
+            @for (owner of owners; track $index) {
+              <option [value]="owner.idCliente">{{ owner.nombre }}</option>  
+            }            
           </select>
         </div>
       </div>

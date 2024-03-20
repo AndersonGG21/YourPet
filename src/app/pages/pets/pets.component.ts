@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Pet, breeds } from '@models/pet';
 import { PetService } from '@services/pet.service';
 import { ConfirmationService } from 'primeng/api';
@@ -12,6 +12,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { UpperCasePipe } from '@angular/common';
+import { Owner } from '@models/owner';
+import { OwnerService } from '@services/owner.service';
+import { MedicineService } from '@services/medicine.service';
+import { Medicine } from '@models/medicine';
 
 
 interface ExportColumn {
@@ -45,7 +49,7 @@ interface Column {
 export default class PetsComponent implements OnInit {
   petDialog: boolean = false;
 
-  pets!: Pet[];
+  pets: Pet[] = [];
 
   pet!: Pet;
 
@@ -61,57 +65,29 @@ export default class PetsComponent implements OnInit {
   
   breedsList : string[] = [];
 
+  owners : Owner[] = []; 
+  medicines: Medicine[] = [];
+
+  ownerService = inject(OwnerService);
+  medicinesService = inject(MedicineService);
+
   constructor(
     private petService: PetService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) {
-    this.pets = [
-      {
-        idMascota: 1,
-        nombre: 'Fido',
-        raza: 'DOBERMAN',
-        edad: 5,
-        peso: 30,
-        idMedicamento: 101,
-        idCliente: 1001,
-      },
-      {
-        idMascota: 2,
-        nombre: 'Whiskers',
-        raza: 'DOBERMAN',
-        edad: 3,
-        peso: 10,
-        idMedicamento: 102,
-        idCliente: 1002,
-      },
-      {
-        idMascota: 3,
-        nombre: 'Luna',
-        raza: 'DALMATIAN',
-        edad: 2,
-        peso: 25,
-        idMedicamento: 103,
-        idCliente: 1003,
-      },
-      {
-        idMascota: 4,
-        nombre: 'Max',
-        raza: 'PUG',
-        edad: 4,
-        peso: 35,
-        idMedicamento: 104,
-        idCliente: 1004,
-      },
-    ];
+  ) {    
   }
 
   ngOnInit() {
     this.petService.getPets().subscribe((pets) => {
       this.pets = pets;
-    });
 
-    
+      this.pets.forEach((pet) => {
+        this.petService.getRandImage(pet.raza).subscribe((data) => {
+          pet.image = data.message;
+        });
+      });
+    });
 
     this.cols = [
       { field: 'idMascota', header: 'ID', customExportHeader: 'ID Mascota' },
@@ -125,12 +101,15 @@ export default class PetsComponent implements OnInit {
       title: col.header,
       dataKey: col.field,
     }));
-    
-    this.pets.forEach((pet) => {
-      this.petService.getRandImage(pet.raza).subscribe((data) => {
-        pet.image = data.message;
-      });
+
+    this.ownerService.getOwners().subscribe((owners) => {
+      this.owners = owners;
     });
+
+    this.medicinesService.getMedicines().subscribe((medicines) => {
+      this.medicines = medicines;
+    });
+
 
     this.breedsList = breeds;
   }
@@ -169,6 +148,11 @@ export default class PetsComponent implements OnInit {
           idMedicamento: 0,
           idCliente: 0,
         };
+
+        this.petService.deletePet(pet.idMascota).subscribe((data) => {
+          console.log("Mascota Borrada");
+        })
+        
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
@@ -198,6 +182,11 @@ export default class PetsComponent implements OnInit {
     if (this.pet.nombre?.trim()) {
       if (this.pet.idMascota) {
         this.pets[this.findIndexById(this.pet.idMascota)] = this.pet;
+
+        this.petService.updatePet(this.pet.idMascota,this.pet).subscribe((data) => {
+          console.log("Mascota Actualizada");
+        })
+
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
@@ -207,17 +196,24 @@ export default class PetsComponent implements OnInit {
       } else {
         this.pet.idMascota = this.createId();
         var aux = this.pet;
+
+        this.petService.savePet(this.pet).subscribe((data) => {
+          console.log("Mascota Creada");
+        })
+
         this.petService.getRandImage(this.pet.raza).subscribe((data) => {          
           aux.image = data.message;
           this.pets.push(aux);                    
           this.pets = [...this.pets];
-        })                  
+        })          
+
         this.messageService.add({
           severity: 'success',
           summary: 'Exitoso',
           detail: 'Mascota Creada',
           life: 3000,
         });
+
       }
 
       this.pets = [...this.pets];
@@ -255,17 +251,24 @@ export default class PetsComponent implements OnInit {
     return id;
   }
 
-  getSeverity(status: string) {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-    }
+  getOwnerNameById(id: number) : string {
+    let ownerName = "";
+    this.owners.forEach((owner) => {
+      if(owner.idCliente == id) {
+        ownerName = owner.nombre;
+      }
+    });
+    return ownerName;
+  }
 
-    return '';
+  getMedNameById(id: number) : string {
+    let medName = "";
+    this.medicines.forEach((med) => {
+      if(med.idMedicamento == id) {
+        medName = med.nombre;
+      }
+    });
+    return medName;
   }
 
   exportPdf() {
