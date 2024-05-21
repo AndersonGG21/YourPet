@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PetService {
 
-  private PETS_API = "https://localhost:44310/api/Mascota";
+  private PETS_API = "https://veterinariapdyp.azurewebsites.net/api/Mascota";
   constructor(private httpClient : HttpClient) { }
 
   getPets() : Observable<Pet[]> { 

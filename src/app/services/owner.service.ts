@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class OwnerService {
 
-  readonly OWNERS_API = "https://localhost:44310/api/Cliente";
+  readonly OWNERS_API = "https://veterinariapdyp.azurewebsites.net/api/Cliente";
 
   constructor(private httpClient : HttpClient) { }
 

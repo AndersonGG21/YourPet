@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class MedicineService {
 
-  readonly MEDICINE_API = "https://localhost:44310/api/Medicamento";
+  readonly MEDICINE_API = "https://veterinariapdyp.azurewebsites.net/api/Medicamento";
   constructor(private httpClient : HttpClient) { }
 
   getMedicines() : Observable<any[]>{
